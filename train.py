@@ -47,6 +47,7 @@ parser.add_argument("--grad_clip", default=1.0, type=float) # reduce it to 0.7 /
 parser.add_argument("--my_pile_version", default=1, type=int)  # my special pile version
 parser.add_argument("--my_pile_stage", default=0, type=int)  # my special pile mode
 parser.add_argument("--my_pile_shift", default=-1, type=int)  # my special pile mode - text shift
+parser.add_argument("--my_data_shift", default=1, type=int)
 parser.add_argument("--my_pile_edecay", default=0, type=int)
 parser.add_argument("--layerwise_lr", default=1, type=int)  # layerwise lr for faster convergence (but slower it/s)
 parser.add_argument("--ds_bucket_mb", default=200, type=int)  # deepspeed bucket size in MB. 200 seems enough
@@ -213,7 +214,6 @@ from src.trainer import train_callback, generate_init_weight
 from src.dataset import MyDataset
 
 train_data = MyDataset(args)
-args.vocab_size = train_data.vocab_size
 
 from src.model import RWKV
 model = RWKV(args)
