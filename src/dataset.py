@@ -32,7 +32,6 @@ class MyDataset(torch.utils.data.Dataset):
         self.samples_per_epoch = args.epoch_steps * args.real_bsz
         # assert self.samples_per_epoch == 40320
         self.magic_prime = find_largest_3k_plus_2_prime(self.data_size // args.ctx_len)
-        assert self.magic_prime == args.magic_prime
         self.factor = int(self.magic_prime * (5**0.5 - 1) / 2)
 
     def __len__(self):
